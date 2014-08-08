@@ -24,6 +24,7 @@ public class Term {
     private String name;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "DATE")
     private Date date;
 
     public String getName() {
