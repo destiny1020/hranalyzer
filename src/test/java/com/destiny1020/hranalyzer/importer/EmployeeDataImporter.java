@@ -1,4 +1,4 @@
-package com.destiny1020.hranalyzer.test;
+package com.destiny1020.hranalyzer.importer;
 
 import java.io.IOException;
 
@@ -6,6 +6,7 @@ import jxl.read.biff.BiffException;
 
 import org.junit.Test;
 
+import com.destiny1020.hranalyzer.DataBaseConfigBase;
 import com.destiny1020.hranalyzer.domain.Employee;
 import com.destiny1020.hranalyzer.domain.Term;
 import com.destiny1020.hranalyzer.xls.XLSReader;

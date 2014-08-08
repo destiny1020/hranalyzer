@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.xls.HRElement;
+
 @Entity
 @Table(name = "DIVISION")
 public class Division extends OrganizationBase {
@@ -15,6 +18,15 @@ public class Division extends OrganizationBase {
 
     public List<Department> getDepartments() {
         return departments;
+    }
+
+    public Division() {
+
+    }
+
+    public Division(HRElement element, Term term) {
+        this.name = element.getDivision().trim().replaceAll(" +", " ");
+        this.beginTerm = term;
     }
 
     public void setDepartments(List<Department> departments) {

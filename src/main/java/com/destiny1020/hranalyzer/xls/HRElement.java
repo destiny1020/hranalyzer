@@ -1,5 +1,7 @@
 package com.destiny1020.hranalyzer.xls;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import jxl.Cell;
 
 /**
@@ -188,5 +190,10 @@ public class HRElement {
 
     public void setSeid(String seid) {
         this.seid = seid;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

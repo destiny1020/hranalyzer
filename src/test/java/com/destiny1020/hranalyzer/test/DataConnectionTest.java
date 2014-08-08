@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.destiny1020.hranalyzer.DataBaseConfigBase;
 import com.destiny1020.hranalyzer.domain.Term;
 
 public class DataConnectionTest extends DataBaseConfigBase {

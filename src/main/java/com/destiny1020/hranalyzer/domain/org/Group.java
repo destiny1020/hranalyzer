@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "GROUP")
 public class Group extends OrganizationBase {
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 

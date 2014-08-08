@@ -10,20 +10,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.xls.HRElement;
+
 @Entity
 @Table(name = "DEPARTMENT")
 public class Department extends OrganizationBase {
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "DIVISION_ID")
     private Division division;
 
     @OneToMany(mappedBy = "department")
     private List<Group> groups;
 
-    // col 9
     @Column(name = "DEPARTMENT_CD")
     private String departmentCode;
+
+    public Department() {
+
+    }
+
+    public Department(HRElement element, Term term) {
+        this.name = element.getDepartment();
+        this.departmentCode = element.getOrgCode();
+    }
 
     public Division getDivision() {
         return division;

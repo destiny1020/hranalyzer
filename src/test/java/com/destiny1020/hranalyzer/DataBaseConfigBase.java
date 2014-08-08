@@ -1,4 +1,4 @@
-package com.destiny1020.hranalyzer.test;
+package com.destiny1020.hranalyzer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
