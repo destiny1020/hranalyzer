@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
 
 @Entity
@@ -32,8 +33,9 @@ public class Department extends OrganizationBase {
     }
 
     public Department(HRElement element, Term term) {
-        this.name = element.getDepartment();
-        this.departmentCode = element.getOrgCode();
+        this.name = StandardizeString.standardize(element.getDepartment());
+        this.departmentCode = element.getOrgCode().trim();
+        this.beginTerm = term;
     }
 
     public Division getDivision() {

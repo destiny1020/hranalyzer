@@ -7,6 +7,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
 
 @Entity
@@ -25,7 +26,7 @@ public class Division extends OrganizationBase {
     }
 
     public Division(HRElement element, Term term) {
-        this.name = element.getDivision().trim().replaceAll(" +", " ");
+        this.name = StandardizeString.standardize(element.getDivision());
         this.beginTerm = term;
     }
 

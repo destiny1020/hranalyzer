@@ -12,6 +12,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import com.destiny1020.hranalyzer.domain.Term;
+
 public class DataBaseConfigBase {
 
     private static final Logger LOGGER = LogManager
@@ -52,5 +54,13 @@ public class DataBaseConfigBase {
         if (emf != null) {
             emf.close();
         }
+    }
+
+    protected Term getTermByName(String name) {
+        return em
+                .createQuery(
+                        "select term from Term term where term.name = :name",
+                        Term.class).setParameter("name", name)
+                .getSingleResult();
     }
 }

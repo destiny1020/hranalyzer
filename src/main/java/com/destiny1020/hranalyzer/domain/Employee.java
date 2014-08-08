@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
 
 @Entity
@@ -58,10 +59,10 @@ public class Employee {
     }
 
     public Employee(HRElement element, Term beginTerm) {
-        this.eid = element.getEid();
-        this.name = element.getName();
-        this.name2 = element.getName2();
-        this.lid = element.getLid();
+        this.eid = element.getEid().trim();
+        this.name = StandardizeString.standardize(element.getName());
+        this.name2 = StandardizeString.standardize(element.getName2());
+        this.lid = element.getLid().trim();
 
         this.beginTerm = beginTerm;
     }
