@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.destiny1020.hranalyzer.domain.org.Department;
 import com.destiny1020.hranalyzer.domain.org.Division;
 import com.destiny1020.hranalyzer.domain.org.Group;
@@ -65,11 +67,29 @@ public class Record {
     private Integer evaluationClass;
 
     @Column(name = "EVA_TYPE")
-    private Integer evaluatonType;
+    private Integer evaluationType;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "SUPERVISOR_ID")
     private Employee supervisor;
+
+    public Record(Term term, Employee employee, Division division,
+            Department department, Group group, Team team, String orgName,
+            TitleClass titleClass, TitleRank titleRank,
+            Integer evaluationClass, Integer evaluationType, Employee supervisor) {
+        this.term = term;
+        this.employee = employee;
+        this.division = division;
+        this.department = department;
+        this.group = group;
+        this.team = team;
+        this.orgName = orgName;
+        this.titleClass = titleClass;
+        this.titleRank = titleRank;
+        this.evaluationClass = evaluationClass;
+        this.evaluationType = evaluationType;
+        this.supervisor = supervisor;
+    }
 
     public Long getId() {
         return id;
@@ -115,11 +135,16 @@ public class Record {
         return supervisor;
     }
 
-    public Integer getEvaluatonType() {
-        return evaluatonType;
+    public Integer getEvaluationType() {
+        return evaluationType;
     }
 
-    public void setEvaluatonType(Integer evaluatonType) {
-        this.evaluatonType = evaluatonType;
+    public void setEvaluationType(Integer evaluatonType) {
+        this.evaluationType = evaluatonType;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

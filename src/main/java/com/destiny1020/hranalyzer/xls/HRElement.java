@@ -2,6 +2,8 @@ package com.destiny1020.hranalyzer.xls;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.destiny1020.hranalyzer.util.StandardizeString;
+
 import jxl.Cell;
 
 /**
@@ -49,7 +51,7 @@ public class HRElement {
     public HRElement(Cell[] row) {
         assert row != null && row.length == 23;
 
-        this.eid = row[0].getContents();
+        this.eid = row[0].getContents().trim();
 
         this.name = row[1].getContents();
         this.name2 = row[2].getContents();
@@ -62,14 +64,14 @@ public class HRElement {
         this.orgName = row[9].getContents();
 
         this.titleClass = row[14].getContents();
-        this.titleRank = row[15].getContents();
+        this.titleRank = StandardizeString.standardize(row[15].getContents());
 
-        this.evaClass = row[16].getContents();
-        this.evaType = row[17].getContents();
+        this.evaClass = row[16].getContents().trim();
+        this.evaType = row[17].getContents().trim();
 
         this.lid = row[19].getContents();
 
-        this.seid = row[20].getContents();
+        this.seid = row[20].getContents().trim();
     }
 
     public String getEid() {

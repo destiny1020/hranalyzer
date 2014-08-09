@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,10 +17,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import com.destiny1020.hranalyzer.domain.Employee;
 import com.destiny1020.hranalyzer.domain.Term;
 import com.destiny1020.hranalyzer.domain.org.Department;
 import com.destiny1020.hranalyzer.domain.org.Division;
 import com.destiny1020.hranalyzer.domain.org.Group;
+import com.destiny1020.hranalyzer.domain.org.Team;
 import com.destiny1020.hranalyzer.domain.rank.TitleClass;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 
@@ -70,6 +73,35 @@ public class DataBaseConfigBase {
                 .createQuery(
                         "select term from Term term where term.name = :name",
                         Term.class).setParameter("name", name)
+                .getSingleResult();
+    }
+
+    // team related below
+    private Map<String, Team> teamCache = new HashMap<String, Team>();
+
+    protected Team getTeamByName(String name) {
+        name = StandardizeString.standardize(name);
+
+        if (StringUtils.isNotEmpty(name)) {
+            Team cachedTeam = teamCache.get(name);
+            if (cachedTeam != null) {
+                return cachedTeam;
+            }
+
+            Team team = getTeamByNameCore(name);
+            teamCache.put(name, team);
+
+            return team;
+        } else {
+            return null;
+        }
+
+    }
+
+    private Team getTeamByNameCore(String name) {
+        return em
+                .createQuery("select t from Team t where t.name = :name",
+                        Team.class).setParameter("name", name)
                 .getSingleResult();
     }
 
@@ -180,10 +212,37 @@ public class DataBaseConfigBase {
     }
 
     private TitleClass getTitleClassByNameCore(String name) {
-        return em
-                .createQuery(
-                        "select tc from TitleClass tc where tc.name = :name",
-                        TitleClass.class).setParameter("name", name)
-                .getSingleResult();
+        TitleClass titleClass = null;
+        try {
+            titleClass = em
+                    .createQuery(
+                            "select tc from TitleClass tc where tc.name = :name",
+                            TitleClass.class).setParameter("name", name)
+                    .getSingleResult();
+
+        } catch (NoResultException nre) {
+            titleClass = null;
+        }
+
+        return titleClass;
+    }
+
+    // employee class related below
+    protected Employee getEmployeeByEid(String eid) {
+        if (StringUtils.isEmpty(eid)) {
+            return null;
+        }
+
+        Employee targetEmployee = null;
+        try {
+            targetEmployee = em
+                    .createNamedQuery(Employee.FIND_EMPLOYEE_BY_EID,
+                            Employee.class).setParameter("eid", eid)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            targetEmployee = null;
+        }
+
+        return targetEmployee;
     }
 }
