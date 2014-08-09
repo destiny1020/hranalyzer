@@ -20,6 +20,7 @@ import com.destiny1020.hranalyzer.domain.Term;
 import com.destiny1020.hranalyzer.domain.org.Department;
 import com.destiny1020.hranalyzer.domain.org.Division;
 import com.destiny1020.hranalyzer.domain.org.Group;
+import com.destiny1020.hranalyzer.domain.rank.TitleClass;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 
 public class DataBaseConfigBase {
@@ -154,6 +155,35 @@ public class DataBaseConfigBase {
         return em
                 .createQuery("select d from Division d where d.name = :name",
                         Division.class).setParameter("name", name)
+                .getSingleResult();
+    }
+
+    // title class related below
+    private Map<String, TitleClass> titleClassCache = new HashMap<String, TitleClass>();
+
+    protected TitleClass getTitleClassByName(String name) {
+        name = StandardizeString.standardize(name);
+
+        if (StringUtils.isNotEmpty(name)) {
+            TitleClass cachedTitleClass = titleClassCache.get(name);
+            if (cachedTitleClass != null) {
+                return cachedTitleClass;
+            }
+
+            TitleClass tc = getTitleClassByNameCore(name);
+            titleClassCache.put(name, tc);
+
+            return tc;
+        } else {
+            return null;
+        }
+    }
+
+    private TitleClass getTitleClassByNameCore(String name) {
+        return em
+                .createQuery(
+                        "select tc from TitleClass tc where tc.name = :name",
+                        TitleClass.class).setParameter("name", name)
                 .getSingleResult();
     }
 }

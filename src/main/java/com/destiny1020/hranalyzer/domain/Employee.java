@@ -1,5 +1,6 @@
 package com.destiny1020.hranalyzer.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
@@ -41,6 +44,18 @@ public class Employee {
     @Column(name = "NAME2", nullable = true)
     private String name2;
 
+    @Column(name = "LAST_NAME", nullable = true)
+    private String lastName;
+
+    @Column(name = "FIRST_NAME", nullable = true)
+    private String firstName;
+
+    @Column(name = "LAST_NAME2", nullable = true)
+    private String lastName2;
+
+    @Column(name = "FIRST_NAME2", nullable = true)
+    private String firstName2;
+
     @Column(name = "LID", nullable = true)
     private String lid;
 
@@ -65,6 +80,24 @@ public class Employee {
         this.lid = element.getLid().trim();
 
         this.beginTerm = beginTerm;
+
+        // assign lastnames and firstnames
+        String[] names = this.name.split(" ");
+        System.out.println(Arrays.toString(names));
+        if (names.length >= 2) {
+            this.lastName = names[0];
+            this.firstName = names[names.length - 1];
+        }
+        this.name = this.name.replaceAll(" +", "");
+
+        if (StringUtils.isNotEmpty(this.name2)) {
+            names = this.name2.split(" ");
+            if (names.length >= 2) {
+                this.lastName2 = names[0];
+                this.firstName2 = names[names.length - 1];
+            }
+            this.name2 = this.name2.replaceAll(" +", "");
+        }
     }
 
     public String getName() {
@@ -117,6 +150,38 @@ public class Employee {
 
     public void setBeginTerm(Term beginTerm) {
         this.beginTerm = beginTerm;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName2() {
+        return lastName2;
+    }
+
+    public void setLastName2(String lastName2) {
+        this.lastName2 = lastName2;
+    }
+
+    public String getFirstName2() {
+        return firstName2;
+    }
+
+    public void setFirstName2(String firstName2) {
+        this.firstName2 = firstName2;
     }
 
 }
