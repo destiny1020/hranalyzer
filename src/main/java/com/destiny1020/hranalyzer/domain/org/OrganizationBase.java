@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.destiny1020.hranalyzer.domain.Term;
 
 @MappedSuperclass
@@ -49,4 +51,8 @@ public class OrganizationBase {
         this.beginTerm = beginTerm;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

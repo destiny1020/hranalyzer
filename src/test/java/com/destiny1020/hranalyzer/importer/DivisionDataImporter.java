@@ -13,7 +13,6 @@ import com.destiny1020.hranalyzer.xls.XLSReader;
 
 public class DivisionDataImporter extends DataBaseConfigBase {
 
-    @Test
     public void importDivision201312() throws BiffException, IOException {
         // prepare the data from source
         XLSReader reader = new XLSReader("data/201312.xls");
@@ -25,10 +24,6 @@ public class DivisionDataImporter extends DataBaseConfigBase {
         Division division = null;
         for (int idx = 1; idx < reader.getTotalRows(); idx++) {
             division = new Division(reader.getRow(idx), term201312);
-
-            //            if (division.getName().isEmpty()) {
-            //                System.out.println(reader.getRow(idx));
-            //            }
 
             // try to get the division by name
             Long count = em
@@ -43,7 +38,6 @@ public class DivisionDataImporter extends DataBaseConfigBase {
         }
     }
 
-    @Test
     public void importDivision201406() throws BiffException, IOException {
         // prepare the data from source
         XLSReader reader = new XLSReader("data/201406.xls");
@@ -67,6 +61,12 @@ public class DivisionDataImporter extends DataBaseConfigBase {
                 em.persist(division);
             }
         }
+    }
+
+    @Test
+    public void importDivisionData() throws BiffException, IOException {
+        importDivision201312();
+        importDivision201406();
     }
 
 }

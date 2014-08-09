@@ -9,8 +9,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.util.StandardizeString;
+import com.destiny1020.hranalyzer.xls.HRElement;
+
 @Entity
-@Table(name = "GROUP")
+@Table(name = "GROUPING")
 public class Group extends OrganizationBase {
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
@@ -19,6 +23,15 @@ public class Group extends OrganizationBase {
 
     @OneToMany(mappedBy = "group")
     private List<Team> teams;
+
+    public Group() {
+
+    }
+
+    public Group(HRElement element, Term term) {
+        this.name = StandardizeString.standardize(element.getGroup());
+        this.beginTerm = term;
+    }
 
     public Department getDepartment() {
         return department;

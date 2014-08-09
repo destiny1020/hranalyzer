@@ -6,6 +6,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.util.StandardizeString;
+import com.destiny1020.hranalyzer.xls.HRElement;
+
 @Entity
 @Table(name = "TEAM")
 public class Team extends OrganizationBase {
@@ -13,6 +17,15 @@ public class Team extends OrganizationBase {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "GROUP_ID")
     private Group group;
+
+    public Team() {
+
+    }
+
+    public Team(HRElement element, Term term) {
+        this.name = StandardizeString.standardize(element.getTeam());
+        this.beginTerm = term;
+    }
 
     public Group getGroup() {
         return group;
