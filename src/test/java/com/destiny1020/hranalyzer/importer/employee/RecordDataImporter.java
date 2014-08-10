@@ -101,7 +101,9 @@ public class RecordDataImporter extends DataBaseConfigBase {
                     team, orgName, titleClass, titleRank, evaluationClass,
                     evaluationType, supervisor);
 
+            employee.setCurrentRecord(record);
             em.persist(record);
+            em.merge(employee);
         }
     }
 

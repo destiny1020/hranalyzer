@@ -1,0 +1,24 @@
+{
+  "name": "hranalyzer",
+  "description": "hranalyzer",
+  "version": "0.0.1",
+  "homepage": "https://github.com/destiny1020/hranalyzer",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "**/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "angular": "~1.2.1",
+    "angular-route": "~1.2.1",
+    "angular-scenario": "~1.2.1",
+    "angular-mocks": "~1.2.1",
+    "requirejs": "~2.1.9",
+    "requirejs-text": "~2.0.10",
+    "html5-boilerplate": "~4.3.0"
+  }
+}

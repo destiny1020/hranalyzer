@@ -15,8 +15,6 @@ public class EmployeeSerializer extends JsonSerializer<Employee> {
             SerializerProvider provider) throws IOException,
             JsonProcessingException {
 
-        System.out.println("agent x");
-
         // output the custom Json
         generator.writeStartObject();
 

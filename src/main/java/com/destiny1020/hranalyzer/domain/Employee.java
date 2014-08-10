@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -66,7 +66,8 @@ public class Employee {
     @JoinColumn(name = "REGISTER_TERM_ID")
     private Term beginTerm;
 
-    @Transient
+    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CURRENT_RECORD_ID", nullable = true)
     private Record currentRecord;
 
     @OneToMany(mappedBy = "employee")

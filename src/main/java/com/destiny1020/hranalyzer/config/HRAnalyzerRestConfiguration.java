@@ -9,7 +9,7 @@ import com.destiny1020.hranalyzer.domain.Employee;
 
 @Configuration
 @Import(RepositoryRestMvcConfiguration.class)
-public class CatServiceRestConfiguration extends RepositoryRestMvcConfiguration {
+public class HRAnalyzerRestConfiguration extends RepositoryRestMvcConfiguration {
 
     @Override
     protected void configureRepositoryRestConfiguration(
