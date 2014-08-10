@@ -13,9 +13,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("com.destiny1020.hranalyzer.repo")
+@EnableTransactionManagement
+@EnableJpaRepositories("com.destiny1020.hranalyzer.rest.repo")
 public class DatabaseConfig {
 
     @Autowired

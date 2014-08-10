@@ -21,10 +21,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "EMPLOYEE")
 @NamedQueries({ @NamedQuery(name = Employee.FIND_EMPLOYEE_BY_EID, query = Employee.FIND_EMPLOYEE_BY_EID_SQL) })
+//@JsonSerialize(using = EmployeeSerializer.class)
+//@JsonIgnoreProperties(value = { "records" })
 public class Employee {
 
     public static final String FIND_EMPLOYEE_BY_EID = "findEmployeeByEid";
@@ -116,6 +119,7 @@ public class Employee {
         this.name2 = name2;
     }
 
+    @JsonIgnore
     public Record getCurrentRecord() {
         return currentRecord;
     }
@@ -124,6 +128,7 @@ public class Employee {
         this.currentRecord = currentRecord;
     }
 
+    @JsonIgnore
     public List<Record> getRecords() {
         return records;
     }
@@ -144,6 +149,7 @@ public class Employee {
         return lid;
     }
 
+    @JsonIgnore
     public Term getBeginTerm() {
         return beginTerm;
     }
