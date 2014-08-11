@@ -73,6 +73,10 @@ public class Record {
     @JoinColumn(name = "SUPERVISOR_ID")
     private Employee supervisor;
 
+    public Record() {
+
+    }
+
     public Record(Term term, Employee employee, Division division,
             Department department, Group group, Team team, String orgName,
             TitleClass titleClass, TitleRank titleRank,
