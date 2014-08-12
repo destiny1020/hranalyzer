@@ -8,6 +8,16 @@ define(["angular", "services"], function (angular) {
         // Sample controller where service is being used
         .controller("MyCtrl1", ["$scope", "version", function ($scope, version) {
             $scope.scopedAppVersion = version;
+
+            $scope.myData = [
+                {name: "Moroni", age: 50},
+                {name: "Tiancum", age: 43},
+                {name: "Jacob", age: 27},
+                {name: "Nephi", age: 29},
+                {name: "Enos", age: 34}
+            ];
+
+            $scope.gridOptions = { data: "myData" };
         }])
 
         // More involved example where controller is required from an external file

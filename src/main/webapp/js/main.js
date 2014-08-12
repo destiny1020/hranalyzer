@@ -14,7 +14,8 @@ require.config({
 
         // angular ui related
         angularRouter: "../lib/angular-ui-router/release/angular-ui-router.min",
-        angularBootstrap: "../lib/angular-bootstrap/ui-bootstrap-tpls.min"
+        angularBootstrap: "../lib/angular-bootstrap/ui-bootstrap-tpls.min",
+        angularGrid: "../lib/angular-grid/build/ng-grid.min"
     },
 
     shim: {
@@ -41,6 +42,11 @@ require.config({
         "angularMocks": {
             deps: ["angular"],
             "exports": "angular.mock"
+        },
+
+        "angularGrid": {
+            deps: ["angular", "jquery"],
+            "exports": "angular-grid"
         }
     },
 

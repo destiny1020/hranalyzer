@@ -1,6 +1,6 @@
 /* app css stylesheet */
 html * {
-    font-family: "Titillium Web", Verdana, Arial;
+  font-family: "Titillium Web", Verdana, Arial;
 }
 
 .menu {
@@ -30,4 +30,9 @@ html * {
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+.gridStyle {
+  width: 400px; 
+  height: 300px
 }

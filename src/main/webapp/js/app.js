@@ -7,6 +7,7 @@ define([
     // 3rd lib
     "angularRouter",
     "angularBootstrap",
+    "angularGrid",
     "restangular",
 
     // hrAnalyzer defined
@@ -27,6 +28,7 @@ define([
 
             // angular ui
             "ui.bootstrap",
+            "ngGrid",
 
             // hr analyzer defined modules
             "hrAnalyzer.filters",
