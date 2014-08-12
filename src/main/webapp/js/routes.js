@@ -18,6 +18,13 @@ define(["angular", "app"], function(angular, app) {
             controller: "MyCtrl2"
         });
 
+        // employee view
+        $stateProvider.state("employee", {
+            url: "/employee",
+            templateUrl: "partials/employee.html",
+            controller: "EmployeeCtrl"
+        })
+
     }]);
 
 });

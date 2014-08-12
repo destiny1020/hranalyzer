@@ -7,3 +7,4 @@ target/
 .springBeans
 src/main/resources/
 src/main/webapp/lib
+example/

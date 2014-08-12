@@ -1,0 +1,10 @@
+<!-- <div class="gridStyle" ng-grid="gridOptions">
+</div> -->
+
+<gridify ng-model="gridOptions"></gridify>
+
+<ul>
+    <li ng-repeat="record in myData">
+        {{ record | json }}
+    </li>
+</ul>

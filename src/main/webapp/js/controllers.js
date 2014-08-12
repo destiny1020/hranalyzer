@@ -17,7 +17,9 @@ define(["angular", "services"], function (angular) {
                 {name: "Enos", age: 34}
             ];
 
-            $scope.gridOptions = { data: "myData" };
+            $scope.gridOptions = { 
+                data: "myData" 
+            };
         }])
 
         // More involved example where controller is required from an external file
@@ -29,5 +31,12 @@ define(["angular", "services"], function (angular) {
                 // Furthermore we need to pass on the $scope as it"s unique to this controller
                 $injector.invoke(myctrl2, this, {"$scope": $scope});
             });
-        }]);
+        }])
+
+        // Employee controller
+        .controller("EmployeeCtrl", ["$scope", "$injector", function($scope, $injector) {
+            require(["controllers/employeeCtrl"], function(employeeCtrl) {
+                $injector.invoke(employeeCtrl, this, {"$scope": $scope});
+            });
+        }])
 });
