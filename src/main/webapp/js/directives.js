@@ -18,9 +18,10 @@ define(["angular", "services"], function(angular, services) {
                 transclude: false,
                 link: function(scope, element, attrs, controller) {
                     var modelAccessor = attrs["ngModel"];
+                    var classes = attrs["ngClass"];
                     scope.$watch(modelAccessor, function(val) {
                         if(val){
-                            var newEl = $compile("<div class='gridStyle' ng-grid='gridOptions'></div>")(scope);
+                            var newEl = $compile("<div class='" + classes + "' ng-grid='gridOptions'></div>")(scope);
                             element.append(newEl);
                         }
                     });

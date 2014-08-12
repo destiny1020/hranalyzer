@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.destiny1020.hranalyzer.domain.Employee;
 
-@RepositoryRestResource(path = "employee")
+@RepositoryRestResource(collectionResourceRel = "data", path = "employee")
 public interface EmployeeRepository extends
         PagingAndSortingRepository<Employee, Long> {
 
