@@ -3,18 +3,47 @@
 require.config({
     paths: {
         angular: "../lib/angular/angular",
-        angularRoute: "../lib/angular-route/angular-route",
         angularMocks: "../lib/angular-mocks/angular-mocks",
-        text: "../lib/requirejs-text/text"
+        text: "../lib/requirejs-text/text",
+
+        jquery: "../lib/jquery/dist/jquery.min",
+
+        // restangular
+        lodash: "../lib/lodash/dist/lodash.min",
+        restangular: "../lib/restangular/dist/restangular.min",
+
+        // angular ui related
+        angularRouter: "../lib/angular-ui-router/release/angular-ui-router.min",
+        angularBootstrap: "../lib/angular-bootstrap/ui-bootstrap-tpls.min"
     },
+
     shim: {
-        "angular" : {"exports" : "angular"},
-        "angularRoute": ["angular"],
+        "angular": {
+            deps: ["jquery"],
+            "exports": "angular"
+        },
+
+        "restangular": {
+            deps: ["angular", "lodash"],
+            "exports": "restangular"
+        },
+
+        "angularRouter": {
+            deps: ["angular"],
+            "exports": "angular-router"
+        },
+
+        "angularBootstrap": {
+            deps: ["angular"],
+            "exports": "angular-boostrap"
+        },
+
         "angularMocks": {
-            deps:["angular"],
-            "exports":"angular.mock"
+            deps: ["angular"],
+            "exports": "angular.mock"
         }
     },
+
     priority: [
         "angular"
     ]

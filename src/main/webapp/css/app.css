@@ -1,4 +1,7 @@
 /* app css stylesheet */
+html * {
+    font-family: "Titillium Web", Verdana, Arial;
+}
 
 .menu {
   list-style: none;
