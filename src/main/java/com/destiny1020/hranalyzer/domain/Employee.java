@@ -16,18 +16,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "EMPLOYEE")
 @NamedQueries({ @NamedQuery(name = Employee.FIND_EMPLOYEE_BY_EID, query = Employee.FIND_EMPLOYEE_BY_EID_SQL) })
 //@JsonSerialize(using = EmployeeSerializer.class)
-//@JsonIgnoreProperties(value = { "records" })
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer" })
 public class Employee {
 
     public static final String FIND_EMPLOYEE_BY_EID = "findEmployeeByEid";
@@ -62,16 +64,22 @@ public class Employee {
     @Column(name = "LID", nullable = true)
     private String lid;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "REGISTER_TERM_ID")
     private Term beginTerm;
 
-    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    @OneToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "CURRENT_RECORD_ID", nullable = true)
     private Record currentRecord;
 
     @OneToMany(mappedBy = "employee")
     private List<Record> records;
+
+    @Transient
+    private String fullname;
+
+    @Transient
+    private String fullname2;
 
     public Employee() {
 
@@ -120,7 +128,7 @@ public class Employee {
         this.name2 = name2;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Record getCurrentRecord() {
         return currentRecord;
     }
@@ -150,7 +158,7 @@ public class Employee {
         return lid;
     }
 
-    @JsonIgnore
+    //    @JsonIgnore
     public Term getBeginTerm() {
         return beginTerm;
     }
@@ -189,6 +197,32 @@ public class Employee {
 
     public void setFirstName2(String firstName2) {
         this.firstName2 = firstName2;
+    }
+
+    public String getFullname() {
+        if (StringUtils.isNotEmpty(lastName)
+                && StringUtils.isNotEmpty(firstName)) {
+            return lastName + "　" + firstName;
+        }
+
+        return "";
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getFullname2() {
+        if (StringUtils.isNotEmpty(lastName2)
+                && StringUtils.isNotEmpty(firstName2)) {
+            return lastName2 + "　" + firstName2;
+        }
+
+        return "";
+    }
+
+    public void setFullname2(String fullname2) {
+        this.fullname2 = fullname2;
     }
 
 }

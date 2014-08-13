@@ -29,6 +29,7 @@ define([], function() {
                         page: page - 1,
                         size: pageSize
                     }).then(function(res) {
+                        // console.log(res.data);
                         $scope.setPagingData(res.data, res.page);
                     }, function(err) {
                         $log.error("fetching employee data error", err);
@@ -50,8 +51,15 @@ define([], function() {
             enablePaging: true,
             showFooter: true,
             totalServerItems: "totalServerItems",
-            pagingOptions: $scope.pagingOptions
+            pagingOptions: $scope.pagingOptions,
+            columnDefs: [
+                { field: "eid", displayName: "Employee ID", width: "25%" },
+                { field: "fullname", displayName: "Name", witdh: "25%" },
+                { field: "fullname2", displayName: "Name2", witdh: "25%" },
+                { field: "lid", displayName: "Employee LID", witdh: "25%" }
+            ]
         };
+
 
         // $scope.$apply();
     }];

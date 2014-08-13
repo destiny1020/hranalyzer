@@ -18,9 +18,13 @@ import com.destiny1020.hranalyzer.domain.org.Group;
 import com.destiny1020.hranalyzer.domain.org.Team;
 import com.destiny1020.hranalyzer.domain.rank.TitleClass;
 import com.destiny1020.hranalyzer.domain.rank.TitleRank;
+import com.destiny1020.hranalyzer.rest.serializer.RecordSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "RECORD")
+@JsonSerialize(using = RecordSerializer.class)
 public class Record {
 
     @Id
@@ -28,7 +32,7 @@ public class Record {
     @Column(name = "PK", updatable = false)
     private Long id;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "TERM_ID")
     private Term term;
 
@@ -103,6 +107,7 @@ public class Record {
         return term;
     }
 
+    @JsonIgnore
     public Employee getEmployee() {
         return employee;
     }
@@ -135,6 +140,7 @@ public class Record {
         return orgName;
     }
 
+    @JsonIgnore
     public Employee getSupervisor() {
         return supervisor;
     }
