@@ -1,6 +1,7 @@
 package com.destiny1020.hranalyzer.rest.serializer;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.destiny1020.hranalyzer.domain.org.Department;
 import com.destiny1020.hranalyzer.domain.org.Division;
@@ -23,10 +24,16 @@ public class DivisionSerializer extends JsonSerializer<Division> {
         generator.writeFieldName("division");
         generator.writeString(division.getName());
 
+        List<Department> departments = division.getDepartments();
+
+        // current division's departments' number
+        generator.writeFieldName("departmentsCount");
+        generator.writeNumber(departments.size());
+
         // current division's departments
         generator.writeFieldName("departments");
         generator.writeStartArray();
-        for (Department department : division.getDepartments()) {
+        for (Department department : departments) {
             generator.writeString(department.getName());
         }
         generator.writeEndArray();

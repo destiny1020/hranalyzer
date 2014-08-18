@@ -5,21 +5,11 @@ define(["angular", "services"], function (angular) {
     /* Controllers */
     
     return angular.module("hrAnalyzer.controllers", ["hrAnalyzer.services"])
-        // Sample controller where service is being used
-        .controller("MyCtrl1", ["$scope", "version", function ($scope, version) {
-            $scope.scopedAppVersion = version;
-
-            $scope.myData = [
-                {name: "Moroni", age: 50},
-                {name: "Tiancum", age: 43},
-                {name: "Jacob", age: 27},
-                {name: "Nephi", age: 29},
-                {name: "Enos", age: 34}
-            ];
-
-            $scope.gridOptions = { 
-                data: "myData" 
-            };
+        // Division controller
+        .controller("DivisionCtrl", ["$scope", "$injector", function($scope, $injector) {
+            require(["controllers/divisionCtrl"], function(divisionCtrl) {
+                $injector.invoke(divisionCtrl, this, {"$scope": $scope});
+            });
         }])
 
         // More involved example where controller is required from an external file
