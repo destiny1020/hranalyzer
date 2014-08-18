@@ -7,11 +7,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.rest.serializer.TitleRankSerializer;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "TITLE_RANK")
+@JsonSerialize(using = TitleRankSerializer.class)
 public class TitleRank extends TitleBase {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)

@@ -7,11 +7,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.rest.serializer.TitleClassSerializer;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "TITLE_CLASS")
+@JsonSerialize(using = TitleClassSerializer.class)
 public class TitleClass extends TitleBase {
 
     @OneToMany(mappedBy = "titleClass")

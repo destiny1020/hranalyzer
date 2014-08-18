@@ -10,11 +10,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.rest.serializer.GroupSerializer;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "GROUPING")
+@JsonSerialize(using = GroupSerializer.class)
 public class Group extends OrganizationBase {
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

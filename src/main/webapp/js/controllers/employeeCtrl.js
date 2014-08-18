@@ -46,21 +46,37 @@ define([], function() {
             }
         }, true);
 
+        $scope.columnDefs = [
+            { field: "eid", displayName: "Employee ID", width: "10%" },
+            { field: "fullname", displayName: "Name", witdh: "10%" },
+            { field: "fullname2", displayName: "Name2", witdh: "10%" },
+            { field: "lid", displayName: "Employee LID", witdh: "10%" },
+
+            // current record
+            { field: "currentRecord.division.name", displayName: "Division", width: "10%" },
+            { field: "currentRecord.department.name", displayName: "Department", width: "10%" },
+            { field: "currentRecord.group.name", displayName: "Group", width: "10%" },
+            { field: "currentRecord.team.name", displayName: "Team", width: "10%" },
+            { field: "currentRecord.titleClass.name", displayName: "Title", width: "10%" },
+            { field: "currentRecord.titleRank.name", displayName: "Rank", width: "10%" }
+        ]
+
         $scope.gridOptions = { 
             data: "currentEmployees",
             enablePaging: true,
             showFooter: true,
             totalServerItems: "totalServerItems",
             pagingOptions: $scope.pagingOptions,
-            columnDefs: [
-                { field: "eid", displayName: "Employee ID", width: "25%" },
-                { field: "fullname", displayName: "Name", witdh: "25%" },
-                { field: "fullname2", displayName: "Name2", witdh: "25%" },
-                { field: "lid", displayName: "Employee LID", witdh: "25%" }
-            ]
+            enableRowSelection: false,
+            columnDefs: $scope.columnDefs
         };
 
 
         // $scope.$apply();
+
+        // grid options
+        $scope.clickGridOptions = function() {
+            // TODO
+        };
     }];
 });

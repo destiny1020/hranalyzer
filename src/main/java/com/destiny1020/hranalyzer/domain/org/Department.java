@@ -11,11 +11,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.rest.serializer.DepartmentSerializer;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "DEPARTMENT")
+@JsonSerialize(using = DepartmentSerializer.class)
 public class Department extends OrganizationBase {
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

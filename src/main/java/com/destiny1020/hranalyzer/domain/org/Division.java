@@ -9,12 +9,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.destiny1020.hranalyzer.domain.Term;
+import com.destiny1020.hranalyzer.rest.serializer.DivisionSerializer;
 import com.destiny1020.hranalyzer.util.StandardizeString;
 import com.destiny1020.hranalyzer.xls.HRElement;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "DIVISION")
 @NamedQueries({ @NamedQuery(name = Division.FIND_DIVISION_BY_NAME, query = Division.FIND_DIVISION_BY_NAME_SQL) })
+@JsonSerialize(using = DivisionSerializer.class)
 public class Division extends OrganizationBase {
 
     public static final String FIND_DIVISION_BY_NAME = "findDivisionByName";
