@@ -8,6 +8,7 @@ define([
     "angularRouter",
     "angularBootstrap",
     "angularGrid",
+    "angularSelect2",
     "restangular",
 
     // hrAnalyzer defined
@@ -29,6 +30,7 @@ define([
             // angular ui
             "ui.bootstrap",
             "ngGrid",
+            "ui.select2",
 
             // hr analyzer defined modules
             "hrAnalyzer.filters",

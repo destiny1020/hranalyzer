@@ -20,6 +20,10 @@ public class DivisionSerializer extends JsonSerializer<Division> {
         // output the custom Json
         generator.writeStartObject();
 
+        // current division id
+        generator.writeFieldName("id");
+        generator.writeNumber(division.getId());
+
         // current division name
         generator.writeFieldName("division");
         generator.writeString(division.getName());

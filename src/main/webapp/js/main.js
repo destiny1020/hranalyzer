@@ -15,7 +15,10 @@ require.config({
         // angular ui related
         angularRouter: "../lib/angular-ui-router/release/angular-ui-router.min",
         angularBootstrap: "../lib/angular-bootstrap/ui-bootstrap-tpls.min",
-        angularGrid: "../lib/angular-grid/build/ng-grid.min"
+        angularGrid: "../lib/angular-grid/build/ng-grid.min",
+
+        select2: "../lib/select2/select2.min",
+        angularSelect2: "../lib/angular-ui-select2/src/select2"
     },
 
     shim: {
@@ -47,6 +50,11 @@ require.config({
         "angularGrid": {
             deps: ["angular", "jquery"],
             "exports": "angular-grid"
+        },
+
+        "angularSelect2": {
+            deps: ["angular", "jquery", "select2"],
+            "exports": "angular-select2"
         }
     },
 

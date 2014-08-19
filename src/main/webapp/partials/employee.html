@@ -1,3 +1,34 @@
+<div id="employeeSearchDiv">
+    <div class="container">
+        <h3>Search Criteria</h3>
+        <div class="col-xs-12">
+            <form class="form-horizontal" role="form">
+
+                <div class="form-group row">
+                    <!-- select user -->
+                    <label for="uid" class="col-xs-1 control-label">User</label>
+                    <div class="col-xs-4" class="form-control">
+                        <select ui-select2 ng-model="test" data-placeholder="Pick a division">
+                            <option value=""></option>
+                            <option value="one">First</option>
+                            <option value="two">Second</option>
+                            <option value="three">Third</option>
+                        </select>
+                    </div>
+                    <!-- select status -->
+                    <label for="status" class="col-xs-1 control-label">Status</label>
+                    <div class="col-xs-4">
+                        <a tooltip-placement="top" tooltip="Specify Execution Status, Success/Fail">
+                            <select type="text" class="form-control" id="status" ng-model="sdata.status" ng-options="s for s in statusOptions"/>
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
 <div id="employeeGridOptions">
     <button class="btn btn-md btn-primary" ng-click="clickGridOptions()">
         Grid Options

@@ -1,6 +1,6 @@
 // employee controller
 define([], function() {
-    return ["$scope", "$log", "Restangular", function($scope, $log, Restangular) {
+    return ["$scope", "$log", "Restangular", "HRBasicData", function($scope, $log, Restangular, HRBasicData) {
 
         $scope.columnDefs = [
             { field: "content.division", displayName: "Division", width: "50%" },
@@ -49,7 +49,6 @@ define([], function() {
 
         // click the departments
         $scope.expandDepartments = function(row) {
-            console.log(row);
         };
     }];
 });

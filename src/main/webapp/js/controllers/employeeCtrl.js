@@ -2,6 +2,8 @@
 define([], function() {
     return ["$scope", "$log", "Restangular", function($scope, $log, Restangular) {
 
+        $scope.test = "";
+
         $scope.totalServerItems = 0;
         $scope.pagingOptions = {
             pageSizes: [10, 20, 50],

@@ -1,11 +1,10 @@
 "use strict";
 
-define(["angular"], function (angular) {
-    
-    /* Services */
-
-    // Demonstrate how to register services
-    // In this case it is a simple value service.
-    angular.module("hrAnalyzer.services", [])
-        .value("version", "0.1");
+define([
+    "angular",
+    "services/basicDataService"
+], function (angular, hrBasicData) {
+    return angular.module("hrAnalyzer.services", [])
+        .value("version", "0.1")
+        .factory("HRBasicData", hrBasicData);
 });
