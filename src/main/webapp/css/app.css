@@ -62,3 +62,7 @@ html * {
   position: relative;
   bottom: 5px;
 }
+
+.wp100 {
+  width: 100%;
+}
