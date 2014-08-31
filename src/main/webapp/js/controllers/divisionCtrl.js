@@ -1,7 +1,7 @@
 var app = angular.module('hrAnalyzer');
 
 // division controller
-app.controller('divisionController', ['$scope', '$log', 'Restangular', 'HRBasicData', 'HRBasicDataFetch', function($scope, $log, Restangular, HRBasicData, HRBasicDataFetch) {
+app.controller('divisionController', ['$scope', '$log', '$timeout', 'Restangular', 'hrData', function($scope, $log, $timeout, Restangular, hrData) {
 
         $scope.columnDefs = [
             { field: 'content.division', displayName: 'Division', width: '50%' },
@@ -23,25 +23,25 @@ app.controller('divisionController', ['$scope', '$log', 'Restangular', 'HRBasicD
 
         $scope.setData = function(data) {
             $scope.currentDivisions = data;
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
+            // store the divisions data
+            hrData.divisions(data);
         };
 
         // no need to use paging func
         $scope.getDataAsync = function() {
-            var divisionEndpoint = Restangular.one('hr/division');
-            divisionEndpoint.get().then(function(res) {
-                $scope.setData(res.data);
-            }, function(err) {
-                $log.error('fetching division data error', err);
-            });
+            // check whether data is already stored
+            var data = hrData.divisions();
+            if(data) {
+                $scope.setData(data);
+            } else {
+                $log.error("retrieve divisions from store failed");
+            }
         };
 
-        // retrieve data at once
-        $scope.getDataAsync();
-
-        // $scope.$apply();
+        // retrieve data at once, waiting the app.run finish the fetching
+        $timeout(function() {
+            $scope.getDataAsync();
+        }, 0);
 
         // grid options
         $scope.clickGridOptions = function() {
@@ -50,10 +50,9 @@ app.controller('divisionController', ['$scope', '$log', 'Restangular', 'HRBasicD
 
         // click the departments
         $scope.expandDepartments = function(row) {
-            HRBasicDataFetch.fetchDivisions();
+            if(!$scope.divisions) {
+                // fetch the departments and store
+            }
         };
-
-        // retrieve the divisions data
-        $scope.divisions = HRBasicData.divisions();
     }]
 );

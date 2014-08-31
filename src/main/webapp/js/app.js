@@ -12,3 +12,8 @@ var app = angular.module('hrAnalyzer', [
             'ngGrid',
             'ui.select2'
         ]);
+
+app.run(['hrData', function(hrData) {
+    // trigger the division fetching
+    hrData.divisions();
+}]);

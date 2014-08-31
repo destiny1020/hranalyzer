@@ -1,7 +1,7 @@
 var app = angular.module('hrAnalyzer');
 
 // employee controller
-app.controller('employeeController', ['$scope', '$log', 'Restangular', function($scope, $log, Restangular) {
+app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular', 'hrData', function($scope, $log, $timeout, Restangular, hrData) {
 
         $scope.test = '';
 
@@ -15,30 +15,25 @@ app.controller('employeeController', ['$scope', '$log', 'Restangular', function(
         $scope.setPagingData = function(data, page) {
             $scope.currentEmployees = data;
             $scope.totalServerItems = page.totalElements;
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
         };
 
         $scope.getPagedDataAsync = function(pageSize, page, searchText) {
-            setTimeout(function () {
-                var data;
-                if (searchText) {
-                    var ft = searchText.toLowerCase();
-                    // TODO
-                } else {
-                    var employeeEndpoint = Restangular.one('hr/employee');
-                    employeeEndpoint.get({
-                        page: page - 1,
-                        size: pageSize
-                    }).then(function(res) {
-                        // console.log(res.data);
-                        $scope.setPagingData(res.data, res.page);
-                    }, function(err) {
-                        $log.error('fetching employee data error', err);
-                    });
-                }
-            }, 0);
+            var data;
+            if (searchText) {
+                var ft = searchText.toLowerCase();
+                // TODO
+            } else {
+                var employeeEndpoint = Restangular.one('hr/employee');
+                employeeEndpoint.get({
+                    page: page - 1,
+                    size: pageSize
+                }).then(function(res) {
+                    // console.log(res.data);
+                    $scope.setPagingData(res.data, res.page);
+                }, function(err) {
+                    $log.error('fetching employee data error', err);
+                });
+            }
         };
 
         $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
@@ -74,12 +69,14 @@ app.controller('employeeController', ['$scope', '$log', 'Restangular', function(
             columnDefs: $scope.columnDefs
         };
 
-
-        // $scope.$apply();
-
         // grid options
         $scope.clickGridOptions = function() {
             // TODO
         };
+
+        // get divisionNames from store
+        $timeout(function() {
+            $scope.divisionNames = hrData.divisionNames();
+        }, 0);
     }]
 );

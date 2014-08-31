@@ -6,11 +6,11 @@
 
                 <div class="form-group row">
                     <!-- select user -->
-                    <label for="uid" class="col-xs-1 control-label">User</label>
-                    <div class="col-xs-4">
+                    <label for="uid" class="col-xs-1 control-label">Division</label>
+                    <div class="col-xs-4 mt4">
                         <select ui-select2 ng-model="sDivision" data-placeholder="Please pick a division" class="wp100">
                             <option value=""></option>
-                            <option ng-repeat="division in divisions" value="{{division.id}}">{{division.name}}</option>
+                            <option ng-repeat="division in divisionNames" value="{{division.id}}">{{division.name}}</option>
                         </select>
                     </div>
                     <!-- select status -->
