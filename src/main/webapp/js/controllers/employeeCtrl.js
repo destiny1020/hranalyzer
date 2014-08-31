@@ -1,8 +1,9 @@
-// employee controller
-define([], function() {
-    return ["$scope", "$log", "Restangular", function($scope, $log, Restangular) {
+var app = angular.module('hrAnalyzer');
 
-        $scope.test = "";
+// employee controller
+app.controller('employeeController', ['$scope', '$log', 'Restangular', function($scope, $log, Restangular) {
+
+        $scope.test = '';
 
         $scope.totalServerItems = 0;
         $scope.pagingOptions = {
@@ -26,7 +27,7 @@ define([], function() {
                     var ft = searchText.toLowerCase();
                     // TODO
                 } else {
-                    var employeeEndpoint = Restangular.one("hr/employee");
+                    var employeeEndpoint = Restangular.one('hr/employee');
                     employeeEndpoint.get({
                         page: page - 1,
                         size: pageSize
@@ -34,7 +35,7 @@ define([], function() {
                         // console.log(res.data);
                         $scope.setPagingData(res.data, res.page);
                     }, function(err) {
-                        $log.error("fetching employee data error", err);
+                        $log.error('fetching employee data error', err);
                     });
                 }
             }, 0);
@@ -42,32 +43,32 @@ define([], function() {
 
         $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
 
-        $scope.$watch("pagingOptions", function (newVal, oldVal) {
+        $scope.$watch('pagingOptions', function (newVal, oldVal) {
             if (newVal !== oldVal) {
               $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
             }
         }, true);
 
         $scope.columnDefs = [
-            { field: "eid", displayName: "Employee ID", width: "10%" },
-            { field: "fullname", displayName: "Name", witdh: "10%" },
-            { field: "fullname2", displayName: "Name2", witdh: "10%" },
-            { field: "lid", displayName: "Employee LID", witdh: "10%" },
+            { field: 'eid', displayName: 'Employee ID', width: '10%' },
+            { field: 'fullname', displayName: 'Name', witdh: '10%' },
+            { field: 'fullname2', displayName: 'Name2', witdh: '10%' },
+            { field: 'lid', displayName: 'Employee LID', witdh: '10%' },
 
             // current record
-            { field: "currentRecord.division.name", displayName: "Division", width: "10%" },
-            { field: "currentRecord.department.name", displayName: "Department", width: "10%" },
-            { field: "currentRecord.group.name", displayName: "Group", width: "10%" },
-            { field: "currentRecord.team.name", displayName: "Team", width: "10%" },
-            { field: "currentRecord.titleClass.name", displayName: "Title", width: "10%" },
-            { field: "currentRecord.titleRank.name", displayName: "Rank", width: "10%" }
+            { field: 'currentRecord.division.name', displayName: 'Division', width: '10%' },
+            { field: 'currentRecord.department.name', displayName: 'Department', width: '10%' },
+            { field: 'currentRecord.group.name', displayName: 'Group', width: '10%' },
+            { field: 'currentRecord.team.name', displayName: 'Team', width: '10%' },
+            { field: 'currentRecord.titleClass.name', displayName: 'Title', width: '10%' },
+            { field: 'currentRecord.titleRank.name', displayName: 'Rank', width: '10%' }
         ]
 
         $scope.gridOptions = { 
-            data: "currentEmployees",
+            data: 'currentEmployees',
             enablePaging: true,
             showFooter: true,
-            totalServerItems: "totalServerItems",
+            totalServerItems: 'totalServerItems',
             pagingOptions: $scope.pagingOptions,
             enableRowSelection: false,
             columnDefs: $scope.columnDefs
@@ -80,5 +81,5 @@ define([], function() {
         $scope.clickGridOptions = function() {
             // TODO
         };
-    }];
-});
+    }]
+);

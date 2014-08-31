@@ -1,21 +1,22 @@
-// employee controller
-define([], function() {
-    return ["$scope", "$log", "Restangular", "HRBasicData", "HRBasicDataFetch", function($scope, $log, Restangular, HRBasicData, HRBasicDataFetch) {
+var app = angular.module('hrAnalyzer');
+
+// division controller
+app.controller('divisionController', ['$scope', '$log', 'Restangular', 'HRBasicData', 'HRBasicDataFetch', function($scope, $log, Restangular, HRBasicData, HRBasicDataFetch) {
 
         $scope.columnDefs = [
-            { field: "content.division", displayName: "Division", width: "50%" },
+            { field: 'content.division', displayName: 'Division', width: '50%' },
             { 
-                field: "content.departmentsCount", 
-                displayName: "Department Count", 
-                witdh: "50%",
-                cellTemplate: "partials/cellTemplates/divisionDepartmentCell.html"
+                field: 'content.departmentsCount', 
+                displayName: 'Department Count', 
+                witdh: '50%',
+                cellTemplate: 'partials/cellTemplates/divisionDepartmentCell.html'
             }
         ]
 
         $scope.gridOptions = { 
-            data: "currentDivisions",
+            data: 'currentDivisions',
             showFooter: true,
-            totalServerItems: "totalServerItems",
+            totalServerItems: 'totalServerItems',
             enableRowSelection: false,
             columnDefs: $scope.columnDefs
         };
@@ -29,11 +30,11 @@ define([], function() {
 
         // no need to use paging func
         $scope.getDataAsync = function() {
-            var divisionEndpoint = Restangular.one("hr/division");
+            var divisionEndpoint = Restangular.one('hr/division');
             divisionEndpoint.get().then(function(res) {
                 $scope.setData(res.data);
             }, function(err) {
-                $log.error("fetching division data error", err);
+                $log.error('fetching division data error', err);
             });
         };
 
@@ -54,5 +55,5 @@ define([], function() {
 
         // retrieve the divisions data
         $scope.divisions = HRBasicData.divisions();
-    }];
-});
+    }]
+);

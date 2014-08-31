@@ -17,8 +17,6 @@
     "angular-route": "~1.2.1",
     "angular-scenario": "~1.2.1",
     "angular-mocks": "~1.2.1",
-    "requirejs": "~2.1.9",
-    "requirejs-text": "~2.0.10",
     "html5-boilerplate": "~4.3.0",
     "angular-ui-utils": "~0.1.1",
     "angular-ui-router": "~0.2.10",

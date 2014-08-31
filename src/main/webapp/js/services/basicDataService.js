@@ -1,5 +1,9 @@
+var app = angular.module('hrAnalyzer');
+
+app.value('version', '0.1');
+
 // HR basic data service
-define([], function() {
+app.factory('hrData', [function() {
     var _divisions = null;
 
     var divisions = function(data) {
@@ -15,4 +19,4 @@ define([], function() {
             divisions: divisions
         }
     };
-});
+}]);
