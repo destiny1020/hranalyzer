@@ -1,24 +1,49 @@
 <div id="employeeSearchDiv">
-    <div class="container">
+    <div>
         <h3>Search Criteria</h3>
         <div class="col-xs-12">
             <form class="form-horizontal" role="form">
 
                 <div class="form-group row">
-                    <!-- select user -->
-                    <label for="uid" class="col-xs-1 control-label">Division</label>
-                    <div class="col-xs-4 mt4">
-                        <select ui-select2 ng-model="sDivision" data-placeholder="Please pick a division" class="wp100">
-                            <option value=""></option>
-                            <option ng-repeat="division in divisionNames" value="{{division.id}}">{{division.name}}</option>
-                        </select>
+                    <!-- select division -->
+                    <div class="col-xs-3">
+                        <label>Division</label>
+                        <div class="mt4">
+                            <select ui-select2 ng-model="sDivision" data-placeholder="Please pick a division" class="wp100">
+                                <option value=""></option>
+                                <option ng-repeat="division in divisionNames" value="{{division.id}}">{{division.name}}</option>
+                            </select>
+                        </div>
                     </div>
-                    <!-- select status -->
-                    <label for="status" class="col-xs-1 control-label">Status</label>
-                    <div class="col-xs-4">
-                        <a tooltip-placement="top" tooltip="Specify Execution Status, Success/Fail">
-                            <select type="text" class="form-control" id="status" ng-model="sdata.status" ng-options="s for s in statusOptions"/>
-                        </a>
+                    <!-- select department -->
+                    <div class="col-xs-3">
+                        <label>Department</label>
+                        <div class="mt4">
+                            <select ui-select2 ng-model="sDepartment" data-placeholder="Please pick a department" class="wp100">
+                                <option value=""></option>
+                                <option ng-repeat="department in departmentNames" value="{{department.id}}">{{department.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- select group -->
+                    <div class="col-xs-3">
+                        <label>Group</label>
+                        <div class="mt4">
+                            <select ui-select2 ng-model="sGroup" data-placeholder="Please pick a group" class="wp100">
+                                <option value=""></option>
+                                <option ng-repeat="group in groupNames" value="{{group.id}}">{{group.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- select team -->
+                    <div class="col-xs-3">
+                        <label>Team</label>
+                        <div class="mt4">
+                            <select ui-select2 ng-model="sTeam" data-placeholder="Please pick a team" class="wp100">
+                                <option value=""></option>
+                                <option ng-repeat="team in teamNames" value="{{team.id}}">{{team.name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 

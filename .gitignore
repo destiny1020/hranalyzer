@@ -8,3 +8,6 @@ target/
 src/main/resources/
 src/main/webapp/lib
 example/
+lib/
+/generated/
+/.apt_generated/
