@@ -7,6 +7,8 @@ app.config(['RestangularProvider', function(RestangularProvider) {
     RestangularProvider.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
         var extractedData = {};
 
+        // console.log(data);
+
         if (operation === 'getList' || operation === 'get') {
             // process when the operation is getList
             if (data._embedded) {
@@ -15,6 +17,10 @@ app.config(['RestangularProvider', function(RestangularProvider) {
 
             if (data.page) {
                 extractedData.page = data.page;
+            }
+
+            if (data.contents) {
+                extractedData.data = data.contents;
             }
 
             if (data._links) {
@@ -75,6 +81,36 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     $stateProvider.state('employee', {
         url: '/employee',
         templateUrl: 'partials/employee.html',
-        controller: 'employeeController'
+        controller: 'employeeController',
+        resolve: {
+            // this divisions can be injected into the employeeController, but here just store the data into service
+            // in order to decouple the data from directly injected into controller
+            // refer to: http://stackoverflow.com/questions/11972026/delaying-angularjs-route-change-until-model-loaded-to-prevent-flicker/11972028#11972028
+            divisions: ['$q', 'Restangular', 'hrData', function($q, Restangular, hrData) {
+                var divisionEndpoint = Restangular.one('hr/division');
+                var deferred = $q.defer();
+                divisionEndpoint.get().then(function(res) {
+                    hrData.divisions(res.data);
+                    var divisionOptions = _.map(res.data, function(record) {
+                        // create mappings from division id ---> arrays of departments[id, name]
+                        hrData.addDivisionToDepartment(record.content.id, record.content.departments);
+
+                        return {
+                            id: record.content.id,
+                            name: record.content.division
+                        };
+                    });
+                    hrData.divisionNames(divisionOptions);
+
+                    deferred.resolve(res.data);
+                }, function(err) {
+                    $log.error('fetching division data error', err);
+
+                    deferred.reject();
+                });
+
+                return deferred.promise;
+            }]
+        }
     })
 }]);

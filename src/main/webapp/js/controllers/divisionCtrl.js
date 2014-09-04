@@ -39,9 +39,9 @@ app.controller('divisionController', ['$scope', '$log', '$timeout', 'Restangular
         };
 
         // retrieve data at once, waiting the app.run finish the fetching
-        $timeout(function() {
-            $scope.getDataAsync();
-        }, 0);
+        // $timeout(function() {
+        //     $scope.getDataAsync();
+        // }, 0);
 
         // grid options
         $scope.clickGridOptions = function() {

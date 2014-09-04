@@ -16,6 +16,12 @@ public class PagePackage<T> {
         this.totalPages = pageObject.getTotalPages();
     }
 
+    public PagePackage(List<T> pageObject) {
+        this.contents = pageObject;
+        this.totalCount = contents.size();
+        this.totalPages = 1;
+    }
+
     public List<T> getContents() {
         return contents;
     }

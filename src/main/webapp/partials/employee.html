@@ -19,7 +19,7 @@
                     <div class="col-xs-3">
                         <label>Department</label>
                         <div class="mt4">
-                            <select ui-select2 ng-model="sDepartment" data-placeholder="Please pick a department" class="wp100">
+                            <select ui-select2 ng-model="sDepartment" data-placeholder="Please pick a department" class="wp100" ng-change="changeDepartment()">
                                 <option value=""></option>
                                 <option ng-repeat="department in departmentNames" value="{{department.id}}">{{department.name}}</option>
                             </select>

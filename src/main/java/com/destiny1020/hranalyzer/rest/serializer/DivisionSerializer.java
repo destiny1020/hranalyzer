@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.destiny1020.hranalyzer.domain.org.Department;
 import com.destiny1020.hranalyzer.domain.org.Division;
+import com.destiny1020.hranalyzer.rest.dto.DepartmentDto;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -38,7 +39,7 @@ public class DivisionSerializer extends JsonSerializer<Division> {
         generator.writeFieldName("departments");
         generator.writeStartArray();
         for (Department department : departments) {
-            generator.writeString(department.getName());
+            generator.writeObject(new DepartmentDto(department));
         }
         generator.writeEndArray();
 

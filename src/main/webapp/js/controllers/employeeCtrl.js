@@ -28,7 +28,6 @@ app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular
                     page: page - 1,
                     size: pageSize
                 }).then(function(res) {
-                    // console.log(res.data);
                     $scope.setPagingData(res.data, res.page);
                 }, function(err) {
                     $log.error('fetching employee data error', err);
@@ -75,8 +74,29 @@ app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular
         };
 
         // get divisionNames from store
-        $timeout(function() {
-            $scope.divisionNames = hrData.divisionNames();
-        }, 0);
+        $scope.divisionNames = hrData.divisionNames();
+
+        $scope.$watch("sDivision", function(newVal, oldVal) {
+            // fetch the corresponding department data
+            if(newVal) {
+                $scope.departmentNames = hrData.getDepartments(newVal);
+            }
+        });
+
+        $scope.$watch("sDepartment", function(newVal, oldVal) {
+            // fetch the corresponding department data
+            if(newVal) {
+                hrData.fetchGroups($scope.sDepartment).then(function() {
+                    $scope.groupNames = hrData.getGroupNames();
+                });
+            }
+        });
+
+        $scope.$watch("sGroup", function(newVal, oldVal) {
+            // fetch the corresponding team data
+            if(newVal) {
+                $scope.teamNames = hrData.getTeams(newVal);
+            }
+        });
     }]
 );

@@ -5,8 +5,10 @@ import com.destiny1020.hranalyzer.domain.org.Division;
 public class DivisionDto extends BaseDto {
 
     public DivisionDto(Division division) {
-        this.id = division.getId();
-        this.name = division.getName();
+        if (division != null) {
+            this.id = division.getId();
+            this.name = division.getName();
+        }
     }
 
 }
