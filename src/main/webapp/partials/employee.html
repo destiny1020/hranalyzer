@@ -9,8 +9,8 @@
                     <div class="col-xs-3">
                         <label>Division</label>
                         <div class="mt4">
-                            <select ui-select2 ng-model="sDivision" data-placeholder="Please pick a division" class="wp100">
-                                <option value=""></option>
+                            <select ui-select2 ng-model="searchDto.d" data-placeholder="Please pick a division" class="wp100">
+                                <option value="0">ALL</option>
                                 <option ng-repeat="division in divisionNames" value="{{division.id}}">{{division.name}}</option>
                             </select>
                         </div>
@@ -19,8 +19,8 @@
                     <div class="col-xs-3">
                         <label>Department</label>
                         <div class="mt4">
-                            <select ui-select2 ng-model="sDepartment" data-placeholder="Please pick a department" class="wp100" ng-change="changeDepartment()">
-                                <option value=""></option>
+                            <select ui-select2 ng-model="searchDto.de" data-placeholder="Please pick a department" class="wp100" ng-change="changeDepartment()">
+                                <option value="0">ALL</option>
                                 <option ng-repeat="department in departmentNames" value="{{department.id}}">{{department.name}}</option>
                             </select>
                         </div>
@@ -29,8 +29,8 @@
                     <div class="col-xs-3">
                         <label>Group</label>
                         <div class="mt4">
-                            <select ui-select2 ng-model="sGroup" data-placeholder="Please pick a group" class="wp100">
-                                <option value=""></option>
+                            <select ui-select2 ng-model="searchDto.g" data-placeholder="Please pick a group" class="wp100">
+                                <option value="0">ALL</option>
                                 <option ng-repeat="group in groupNames" value="{{group.id}}">{{group.name}}</option>
                             </select>
                         </div>
@@ -39,15 +39,24 @@
                     <div class="col-xs-3">
                         <label>Team</label>
                         <div class="mt4">
-                            <select ui-select2 ng-model="sTeam" data-placeholder="Please pick a team" class="wp100">
-                                <option value=""></option>
+                            <select ui-select2 ng-model="searchDto.t" data-placeholder="Please pick a team" class="wp100">
+                                <option value="0">ALL</option>
                                 <option ng-repeat="team in teamNames" value="{{team.id}}">{{team.name}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
-
             </form>
+        </div>
+        <div>
+            <button class="btn btn-md btn-primary" ng-click="searchEmployees(searchDto)">
+                <span class="glyphicon glyphicon-search pr5"></span>
+                Search
+            </button>
+            <button class="btn btn-md btn-default" ng-click="clearCriteria()">
+                <span class="glyphicon glyphicon-remove pr5"></span>
+                Clear
+            </button>
         </div>
     </div>
 </div>

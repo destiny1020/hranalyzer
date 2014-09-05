@@ -23,6 +23,15 @@ app.config(['RestangularProvider', function(RestangularProvider) {
                 extractedData.data = data.contents;
             }
 
+            // paging information
+            if (data.totalCount) {
+                extractedData.totalCount = data.totalCount;
+            }
+
+            if (data.totalPages) {
+                extractedData.totalPages = data.totalPages;
+            }
+
             if (data._links) {
                 extractedData.links = data._links;
             }
@@ -86,7 +95,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             // this divisions can be injected into the employeeController, but here just store the data into service
             // in order to decouple the data from directly injected into controller
             // refer to: http://stackoverflow.com/questions/11972026/delaying-angularjs-route-change-until-model-loaded-to-prevent-flicker/11972028#11972028
-            divisions: ['$q', 'Restangular', 'hrData', function($q, Restangular, hrData) {
+            divisions: ['$q', '$log', 'Restangular', 'hrData', function($q, $log, Restangular, hrData) {
                 var divisionEndpoint = Restangular.one('hr/division');
                 var deferred = $q.defer();
                 divisionEndpoint.get().then(function(res) {

@@ -30,28 +30,28 @@ public class EmployeeSpecs {
 
                 // handle division
                 Integer division = searchDto.getDivision();
-                if (division != null) {
+                if (division != null && division > 0) {
                     condition = cb.and(condition, cb.equal(
                             recordJoined.get(Record_.division), division));
                 }
 
                 // handle department
                 Integer department = searchDto.getDepartment();
-                if (department != null) {
+                if (department != null && department > 0) {
                     condition = cb.and(condition, cb.equal(
                             recordJoined.get(Record_.department), department));
                 }
 
                 // handle group
                 Integer group = searchDto.getGroup();
-                if (department != null) {
+                if (group != null && group > 0) {
                     condition = cb.and(condition,
                             cb.equal(recordJoined.get(Record_.group), group));
                 }
 
-                // handle department
+                // handle team
                 Integer team = searchDto.getTeam();
-                if (department != null) {
+                if (team != null && team > 0) {
                     condition = cb.and(condition,
                             cb.equal(recordJoined.get(Record_.team), team));
                 }
