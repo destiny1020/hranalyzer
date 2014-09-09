@@ -12,8 +12,8 @@ app.directive('gridify', ['$parse', '$compile', function($parse, $compile){
         replace: true,
         transclude: false,
         link: function(scope, element, attrs, controller) {
-            var modelAccessor = attrs['ngModel'];
-            var classes = attrs['ngClass'];
+            var modelAccessor = attrs.ngModel;
+            var classes = attrs.ngClass;
             scope.$watch(modelAccessor, function(val) {
                 if(val){
                     var newEl = $compile('<div class="' + classes + '" ng-grid="gridOptions"></div>')(scope);
@@ -21,5 +21,5 @@ app.directive('gridify', ['$parse', '$compile', function($parse, $compile){
                 }
             });
         }
-    }
+    };
 }]);

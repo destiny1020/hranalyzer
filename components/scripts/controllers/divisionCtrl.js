@@ -11,7 +11,7 @@ app.controller('divisionController', ['$scope', '$log', '$timeout', 'Restangular
                 witdh: '50%',
                 cellTemplate: 'partials/cellTemplates/divisionDepartmentCell.html'
             }
-        ]
+        ];
 
         $scope.gridOptions = { 
             data: 'currentDivisions',

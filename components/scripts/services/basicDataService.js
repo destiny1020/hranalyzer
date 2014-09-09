@@ -75,7 +75,7 @@ app.factory('hrData', ['$log', '$q', 'Restangular', function($log, $q, Restangul
     var _groupToTeams = {};
     function _addGroupToTeam(groupId, teams) {
         _groupToTeams[groupId] = teams;
-    };
+    }
 
     // teams related
     var _getTeams = function(groupId) {

@@ -11,3 +11,6 @@ example/
 lib/
 /generated/
 /.apt_generated/
+node_modules/
+builds/
+bower_components/

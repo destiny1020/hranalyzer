@@ -59,7 +59,7 @@ app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular
             { field: 'currentRecord.team.name', displayName: 'Team', width: '10%' },
             { field: 'currentRecord.titleClass.name', displayName: 'Title', width: '10%' },
             { field: 'currentRecord.titleRank.name', displayName: 'Rank', width: '10%' }
-        ]
+        ];
 
         $scope.gridOptions = { 
             data: 'currentEmployees',

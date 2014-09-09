@@ -1,8 +1,6 @@
-'use strict';
-
 var app = angular.module('hrAnalyzer');
 
-app.config(['RestangularProvider', function(RestangularProvider) {
+app.config(['RestangularProvider', 'baseUrl', function(RestangularProvider, baseUrl) {
     // config the Restangular
     RestangularProvider.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
         var extractedData = {};
@@ -44,6 +42,8 @@ app.config(['RestangularProvider', function(RestangularProvider) {
         
         return extractedData;
     });
+
+    RestangularProvider.setBaseUrl(baseUrl);
 }]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -121,5 +121,5 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                 return deferred.promise;
             }]
         }
-    })
+    });
 }]);
