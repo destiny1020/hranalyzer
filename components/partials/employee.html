@@ -3,7 +3,6 @@
         <h3>Search Criteria</h3>
         <div class="col-xs-12">
             <form class="form-horizontal" role="form">
-
                 <div class="form-group row">
                     <!-- select division -->
                     <div class="col-xs-3">
@@ -42,6 +41,42 @@
                             <select ui-select2 ng-model="searchDto.t" data-placeholder="Please pick a team" class="wp100">
                                 <option value="0">ALL</option>
                                 <option ng-repeat="team in teamNames" value="{{team.id}}">{{team.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!-- employee ID -->
+                    <div class="col-xs-3">
+                        <label for="employeeId">Employee ID</label>
+                        <div class="mt4">
+                            <input type="text" class="form-control" placeholder="Employee ID..." ng-model="searchDto.e" name="employeeId"/>
+                        </div>
+                    </div>
+                    <!-- employee name -->
+                    <div class="col-xs-3">
+                        <label for="name">Name</label>
+                        <div class="mt4">
+                            <input type="text" class="form-control" placeholder="Name..." ng-model="searchDto.n" name="name"/>
+                        </div>
+                    </div>
+                    <!-- title class -->
+                    <div class="col-xs-3">
+                        <label>Title Class</label>
+                        <div class="mt4">
+                            <select ui-select2 ng-model="searchDto.tc" data-placeholder="Please pick a title class" class="wp100">
+                                <option value="0">ALL</option>
+                                <option ng-repeat="tc in titleClassNames" value="{{tc.id}}">{{tc.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- title rank -->
+                    <div class="col-xs-3">
+                        <label>Title Rank</label>
+                        <div class="mt4">
+                            <select ui-select2 ng-model="searchDto.tr" data-placeholder="Please pick a title rank" class="wp100">
+                                <option value="0">ALL</option>
+                                <option ng-repeat="tr in titleRankNames" value="{{tr.id}}">{{tr.name}}</option>
                             </select>
                         </div>
                     </div>

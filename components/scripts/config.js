@@ -119,6 +119,35 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                 });
 
                 return deferred.promise;
+            }],
+
+            titleClasses: ['$q', '$log', 'Restangular', 'hrData', function($q, $log, Restangular, hrData) {
+                var titleClassEndpoint = Restangular.one('hr/titleclass');
+                var deferred = $q.defer();
+                titleClassEndpoint.get().then(function(res) {
+                    hrData.titleClasses(res.data);
+                    var titleClassOptions = _.map(res.data, function(record) {
+                        // create mappings from title class id ---> arrays of title rank[id, name]
+                        hrData.addTitleClassToTitleRanks(record.content.id, record.content.ranks);
+
+                        // append title rank data
+                        hrData.appendTitleRankNames(record.content.ranks);
+
+                        return {
+                            id: record.content.id,
+                            name: record.content.titleClass
+                        };
+                    });
+                    hrData.titleClassNames(titleClassOptions);
+
+                    deferred.resolve(res.data);
+                }, function(err) {
+                    $log.error('fetching title class data error', err);
+
+                    deferred.reject();
+                });
+
+                return deferred.promise;
             }]
         }
     });

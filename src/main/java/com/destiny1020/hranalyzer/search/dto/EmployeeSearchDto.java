@@ -16,6 +16,18 @@ public class EmployeeSearchDto {
     // team
     private Integer t;
 
+    // employee id
+    private String e;
+
+    // employee name
+    private String n;
+
+    // title class
+    private Integer tc;
+
+    // title rank
+    private Integer tr;
+
     // page and page size
     private int p;
     private int si;
@@ -71,6 +83,38 @@ public class EmployeeSearchDto {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public String getEmployeeId() {
+        return e;
+    }
+
+    public void setE(String e) {
+        this.e = e;
+    }
+
+    public String getName() {
+        return n;
+    }
+
+    public void setN(String n) {
+        this.n = n;
+    }
+
+    public Integer getTitleClass() {
+        return tc;
+    }
+
+    public void setTc(Integer tc) {
+        this.tc = tc;
+    }
+
+    public Integer getTitleRank() {
+        return tr;
+    }
+
+    public void setTr(Integer tr) {
+        this.tr = tr;
     }
 
 }

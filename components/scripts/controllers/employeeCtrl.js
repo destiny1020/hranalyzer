@@ -8,7 +8,11 @@ app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular
             d: 0,
             de: 0,
             g: 0,
-            t: 0
+            t: 0,
+            e: '',
+            n: '',
+            tc: 0,
+            tr: 0
         };
 
         $scope.totalServerItems = 0;
@@ -102,6 +106,23 @@ app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular
             }
         });
 
+        // get title class from store
+        $scope.titleClassNames = hrData.titleClassNames();
+
+        // get title rank from store
+        $scope.titleRankNames = hrData.titleRankNames();
+
+        $scope.$watch("searchDto.tc", function(newVal, oldVal) {
+            // fetch the corresponding department data
+            if(newVal) {
+                if(newVal !== '0') {
+                    $scope.titleRankNames = hrData.getTitleRanks(newVal);
+                } else {
+                    $scope.titleRankNames = hrData.titleRankNames();
+                }
+            }
+        });
+
         // search funcion
         $scope.searchEmployees = function(searchDto) {
             // reset current page to 1
@@ -116,6 +137,13 @@ app.controller('employeeController', ['$scope', '$log', '$timeout', 'Restangular
             $scope.searchDto.de = 0;
             $scope.searchDto.g = 0;
             $scope.searchDto.t = 0;
+            $scope.searchDto.e = '';
+            $scope.searchDto.n = '';
+            $scope.searchDto.tc = 0;
+            $scope.searchDto.tr = 0;
+
+            // reset the title rank candidates
+            $scope.titleRankNames = hrData.titleRankNames();
         };
 
         function assembleSearchDto(searchDto) {

@@ -82,6 +82,56 @@ app.factory('hrData', ['$log', '$q', 'Restangular', function($log, $q, Restangul
         return _groupToTeams[groupId];
     };
 
+    // title class related
+    var _titleClassToTitleRank = {};
+    var _titleClasses = null;
+    var _titleClassNames = null;
+
+    var titleClasses = function(data) {
+        if(angular.isDefined(data)) {
+            _titleClasses = data;
+        } else {
+            return _titleClasses;
+        }
+    };
+
+    var titleClassNames = function(data) {
+        if(angular.isDefined(data)) {
+            _titleClassNames = data;
+        } else {
+            return _titleClassNames;
+        }
+    };
+
+    var addTitleClassToTitleRanks = function(titleClassId, titleRanks) {
+        _titleClassToTitleRank[titleClassId] = titleRanks;
+    };
+
+    // title rank related
+    var _titleRankNames = null;
+    var titleRankNames = function(data) {
+        if(angular.isDefined(data)) {
+            _titleRankNames = data;
+        } else {
+            return _titleRankNames;
+        }
+    };
+
+    var getTitleRanks = function(titleClassId) {
+        return _titleClassToTitleRank[titleClassId];
+    };
+
+    var appendTitleRankNames = function(data) {
+        if(angular.isDefined(data)) {
+            if(_titleRankNames === null) {
+                _titleRankNames = [];
+            }
+            _titleRankNames = _titleRankNames.concat(data);
+        } else {
+            return _titleRankNames;
+        }
+    };
+
     return {
         divisions: divisions,
         divisionNames: divisionNames,
@@ -95,6 +145,16 @@ app.factory('hrData', ['$log', '$q', 'Restangular', function($log, $q, Restangul
         getGroupNames: _getGroupNames,
 
         // teams API
-        getTeams: _getTeams
+        getTeams: _getTeams,
+
+        // title class API
+        titleClasses: titleClasses,
+        titleClassNames: titleClassNames,
+        addTitleClassToTitleRanks: addTitleClassToTitleRanks,
+
+        // title rank API
+        titleRankNames: titleRankNames,
+        getTitleRanks: getTitleRanks,
+        appendTitleRankNames: appendTitleRankNames
     };
 }]);
