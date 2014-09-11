@@ -96,6 +96,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             // in order to decouple the data from directly injected into controller
             // refer to: http://stackoverflow.com/questions/11972026/delaying-angularjs-route-change-until-model-loaded-to-prevent-flicker/11972028#11972028
             divisions: ['$q', '$log', 'Restangular', 'hrData', function($q, $log, Restangular, hrData) {
+                // if the divisions data has already been fetched, return immediately
+                var divisionsData = hrData.divisions();
+                if(divisionsData !== null && divisionsData.length > 0) {
+                    return divisionsData;
+                }
+
                 var divisionEndpoint = Restangular.one('hr/division');
                 var deferred = $q.defer();
                 divisionEndpoint.get().then(function(res) {
